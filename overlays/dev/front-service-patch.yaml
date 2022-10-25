@@ -5,7 +5,7 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/healthcheck-path: "/"
   labels:
-front-deployment-patch.yaml front-deployment-patch.yaml app: myweb-fargate
+    app: myweb-fargate
     env: dev
 spec:
   selector:
