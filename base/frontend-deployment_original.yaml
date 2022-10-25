@@ -1,0 +1,29 @@
+---   
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - env:
+        - name: API_IP
+          valueFrom:
+            configMapKeyRef:
+              name: favielist-cm
+              key: API_IP
+        image: 817144825811.dkr.ecr.ap-northeast-2.amazonaws.com/movie-frontend:latest
+        name: myweb
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always

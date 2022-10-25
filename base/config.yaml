@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: favielist-cm
+data:
+  MARIADB_DATABASE: "movie"
+  SERVER_PORT: "8080"
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://mydb:3306/movie?useSSL=false"
+  expose: "8080"
+  API_IP: "myapp:8080"

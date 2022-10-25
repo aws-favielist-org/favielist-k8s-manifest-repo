@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb
+  namespace: default
+  labels:
+    env: dev
+app: myweb-fargate
+spec:
+  selector:
+    matchLabels:
+      app: myweb-fargate
+  template:
+    metadata:
+      labels:
+        app: myweb-fargate

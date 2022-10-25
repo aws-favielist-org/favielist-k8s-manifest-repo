@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - env:
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: favielist-cm
+              key: SERVER_PORT
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: favielist-cm
+              key: SPRING_DATASOURCE_URL
+        - name: expose
+          valueFrom:
+            configMapKeyRef:
+              name: favielist-cm
+              key: expose
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: username-pwd-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: username-pwd-secret
+              key: password
+        image: 817144825811.dkr.ecr.ap-northeast-2.amazonaws.com/movie-backend:latest
+        name: myapp
+        ports:
+        - containerPort: 8080
+          name: myapp
+      restartPolicy: Always

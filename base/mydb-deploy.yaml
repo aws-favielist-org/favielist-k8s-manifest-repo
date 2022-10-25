@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydb
+  labels:
+    app: mydb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydb
+  template:
+    metadata:
+      labels:
+        app: mydb
+    spec:
+      containers:
+      - args:
+        - --character-set-server=utf8
+        - --collation-server=utf8_general_ci
+        env:
+        - name: MARIADB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: favielist-cm
+              key: MARIADB_DATABASE
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: username-pwd-secret
+              key: password
+        image: mariadb:10.2
+        name: mydb
+        ports:
+        - containerPort: 3306
+      restartPolicy: Always
