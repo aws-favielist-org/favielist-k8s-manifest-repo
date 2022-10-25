@@ -3,7 +3,7 @@ kind: Kustomization
 images:
 - name: 817144825811.dkr.ecr.ap-northeast-2.amazonaws.com/movie-frontend
   newName: 817144825811.dkr.ecr.ap-northeast-2.amazonaws.com/movie-frontend
-  newTag: abcdefg
+  newTag: e4968b5f
 resources:
 - ../../base
 patchesStrategicMerge:
